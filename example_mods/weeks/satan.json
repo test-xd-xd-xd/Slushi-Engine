@@ -1,0 +1,32 @@
+{
+	"songs": [
+		[
+			"SAtAN",
+			"",
+			[
+				146,
+				0,
+				0
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": false,
+	"weekBackground": "satan",
+	"difficulties": "SATAN",
+	"weekCharacters": [
+		"",
+		"",
+		"bf"
+	],
+	"storyName": "WTF? SATANAS? WHATTT?",
+	"weekName": "SAtAN",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"hideStoryMode": false,
+	"weekBefore": "tutorial",
+	"startUnlocked": true
+}
