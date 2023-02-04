@@ -5,6 +5,10 @@ import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import flixel.math.FlxMath;
+
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+
 #if gl_stats
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
@@ -87,13 +91,21 @@ class FPS extends TextField
 			
 			#if openfl
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			text += "\nMemory: " + memoryMegas + " MB (not really the total ram usage of the game)";
+			text += "\nMemory: " + memoryMegas + " MB";
 			#end
 
 			textColor = 0xFFFFFFFF;
 			if (memoryMegas > 3000 || currentFPS <= ClientPrefs.framerate / 2)
 			{
 				textColor = 0xFFFF0000;
+
+				// By ChatGPT
+				var originalX:Float = 0;
+				var originalY:Float = 0;
+				var firstTween:FlxTween = FlxTween.tween(this, {x: originalX + 10, y: originalY + 2}, 0.1, {ease: FlxEase.quadOut});
+				var secondTween:FlxTween = FlxTween.tween(this, {x: originalX, y: originalY - 4}, 0.1, {ease: FlxEase.quadOut});
+				var thirdTween:FlxTween = FlxTween.tween(this, {x: originalX, y: originalY}, 0.1, {ease: FlxEase.quadOut});
+				firstTween.then(secondTween).then(thirdTween);
 			}
 
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))
