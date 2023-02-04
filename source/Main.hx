@@ -154,7 +154,7 @@ class Main extends Sprite
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/Slushi-Github/Slushi-Engine-beta\n\n> Crash Handler written by: sqirra-rng";
+		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/Slushi-Github/Slushi-Engine\n\n> Crash Handler written by: sqirra-rng";
 
 		if (!FileSystem.exists("./crash/"))
 			FileSystem.createDirectory("./crash/");
@@ -187,7 +187,7 @@ class Main extends Sprite
             //FlxG.mouse.useSystemCursor = true; 
             //window.stage.addChild(sprite);
 
-		Application.current.window.alert(errMsg, "Slushi Engine Error");
+		Application.current.window.alert(errMsg, "Slushi Engine Error!");
 		DiscordClient.shutdown();
 		Sys.exit(1);
 	}
