@@ -1,3 +1,3 @@
-# -Source--Slushi-Engine
+# Slushi-Engine
  
 # An engine based on Psych Engine.
