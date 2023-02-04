@@ -78,7 +78,7 @@ function onUpdate()
 		setTextString('Hori', '  Middlescroll: ' .. (Horizontal and 'On' or 'Off'))
 		setTextString('sectionCheck', '  Section: ' .. (gfSection and 'Dancer' or mustHitSection and 'Player' or 'Opponent'))
 	end
-	if botPlay and chartingMode then -- Persepctive off of player strums!
+	if botplay and chartingMode then -- Persepctive off of player strums!
 		if keyJustPressed('left') then
 			triggerEvent('Change Scrolltype', '', 'on')
 		elseif keyJustPressed('down') then

@@ -38,6 +38,9 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
 
+import openfl.Lib;
+//import openfl.display.Application;
+
 using StringTools;
 typedef TitleData =
 {
@@ -380,8 +383,12 @@ class TitleState extends MusicBeatState
 		logo.screenCenter();
 		logo.antialiasing = ClientPrefs.globalAntialiasing;
 		// add(logo);
-
+		
 		FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
+
+		//var window:FlxTween = new FlxTween();
+
+		FlxTween.tween(Lib.application.window, {y: Lib.application.window.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		credGroup = new FlxGroup();
 		add(credGroup);

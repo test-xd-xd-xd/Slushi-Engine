@@ -171,7 +171,8 @@ class FunkinLua {
 		set('healthLossMult', PlayState.instance.healthLoss);
 		set('playbackRate', PlayState.instance.playbackRate);
 		set('instakillOnMiss', PlayState.instance.instakillOnMiss);
-		set('botPlay', PlayState.instance.cpuControlled);
+		set('botplay', PlayState.instance.cpuControlled);
+		set('autoplay', PlayState.instance.cpuControlled); // para no perder la normalidad del Lua de Psych Engine
 		set('practice', PlayState.instance.practiceMode);
 
 		for (i in 0...4) {

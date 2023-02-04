@@ -1,0 +1,68 @@
+{
+	"storyName": "out of memor-...",
+	"difficulties": "NotITG",
+	"hideFreeplay": false,
+	"weekBackground": "slushi",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"songs": [
+		[
+			"SatAN",
+			"dad",
+			[
+				106,
+				0,
+				0
+			]
+		],
+		[
+			"Doppelganger",
+			"dad",
+			[
+				0,
+				0,
+				100
+			]
+		],
+		[
+			"Goldenslaughterer",
+			"dad",
+			[
+				146,
+				13,
+				253
+			]
+		],
+		[
+			"you are the miserable",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		],
+		[
+			"XNOR XNOR XNOR",
+			"dad",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "SLUSHI HATES YOU",
+	"hiddenUntilUnlocked": false
+}

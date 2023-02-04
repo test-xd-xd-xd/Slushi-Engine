@@ -50,7 +50,7 @@ class ClientPrefs {
 		'healthloss' => 1.0,
 		'instakill' => false,
 		'practice' => false,
-		'botplay' => false,
+		'autoplay' => false,
 		'opponentplay' => false
 	];
 
