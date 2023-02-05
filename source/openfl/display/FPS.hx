@@ -9,6 +9,8 @@ import flixel.math.FlxMath;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 
+import flixel.FlxG;
+
 #if gl_stats
 import openfl.display._internal.stats.Context3DStats;
 import openfl.display._internal.stats.DrawCallContext;
@@ -35,6 +37,10 @@ class FPS extends TextField
 		The current frame rate, expressed using frames-per-second
 	**/
 	public var currentFPS(default, null):Int;
+
+
+		//puto
+
 
 	@:noCompletion private var cacheCount:Int;
 	@:noCompletion private var currentTime:Float;
@@ -94,18 +100,20 @@ class FPS extends TextField
 			text += "\nMemory: " + memoryMegas + " MB";
 			#end
 
+			text += "\nSlushi Engine v" + MainMenuState.slushiEngineVersion;
+
 			textColor = 0xFFFFFFFF;
 			if (memoryMegas > 3000 || currentFPS <= ClientPrefs.framerate / 2)
 			{
 				textColor = 0xFFFF0000;
 
-				// By ChatGPT
-				var originalX:Float = 0;
-				var originalY:Float = 0;
-				var firstTween:FlxTween = FlxTween.tween(this, {x: originalX + 10, y: originalY + 2}, 0.1, {ease: FlxEase.quadOut});
-				var secondTween:FlxTween = FlxTween.tween(this, {x: originalX, y: originalY - 4}, 0.1, {ease: FlxEase.quadOut});
-				var thirdTween:FlxTween = FlxTween.tween(this, {x: originalX, y: originalY}, 0.1, {ease: FlxEase.quadOut});
-				firstTween.then(secondTween).then(thirdTween);
+				// Trock was here.
+				FlxTween.tween(this, {x: FlxG.random.int(-10, 10), y: FlxG.random.int(-10, 10)}, 0.1, {ease: FlxEase.quadOut});
+
+			};
+			else if (this.x != 0 || this.y != 0)
+			{
+				FlxTween.tween(this, {x: 0, y: 0}, 0.1, {ease: FlxEase.quadOut});
 			}
 
 			#if (gl_stats && !disable_cffi && (!html5 || !canvas))

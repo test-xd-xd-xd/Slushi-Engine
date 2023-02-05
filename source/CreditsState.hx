@@ -80,10 +80,11 @@ class CreditsState extends MusicBeatState
 		}
 		#end
 
-		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		var creditedPeople:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Slushi Engine Team'],
-			['Andres',		'slushi',		'"Programmer" of Slushi Engine',								'https://twitter.com/Andres_Tik',	'444444'],
-            [''],
+			['Andres',		'slushi',		'Creator of Slushi Engine',											'https://twitter.com/Andres_Tik',		'444444'],
+            ['Trock', 		'trock',			'Programmer of Slushi Engine',										'https://twitter.com/Gametrock1',		''],
+			
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
 			['RiverOaken',			'river',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/RiverOaken',		'B42F71'],
@@ -109,10 +110,10 @@ class CreditsState extends MusicBeatState
 			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								'https://twitter.com/kawaisprite',		'378FC7']
 		    ];
 		
-		for(i in pisspoop){
+		for(i in creditedPeople){
 			creditsStuff.push(i);
 		}
-	
+		
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !unselectableCheck(i);
