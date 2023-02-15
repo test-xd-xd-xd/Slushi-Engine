@@ -21,12 +21,15 @@ import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
 
+import lime.utils.AssetLibrary;
+
 using StringTools;
 
 class MainMenuState extends MusicBeatState
-{
+{ 
 	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
 	public static var slushiEngineVersion:String = '0.0.1 (ALPHA)';
+	//public static var sleBuild:String = new Date.
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -49,7 +52,7 @@ class MainMenuState extends MusicBeatState
 	var debugKeys:Array<FlxKey>;
 
 	override function create()
-	{
+	{		
 		#if MODS_ALLOWED
 		Paths.pushGlobalMods();
 		#end
@@ -132,7 +135,7 @@ class MainMenuState extends MusicBeatState
 			
 			// Chikn Nuggit XD:
 			var chikn = new FlxSprite(30, -150);
-			chikn.loadGraphic(Paths.image('chikn'));
+			chikn.loadGraphic(Paths.Paths.getPath('images/pers/img'+FlxG.random.int(1,1)+'.png', IMAGE));
 			chikn.scrollFactor.set(0, 0);
 			chikn.setGraphicSize(Std.int(chikn.width * 0.3));
 			chikn.antialiasing = ClientPrefs.globalAntialiasing;
@@ -144,7 +147,7 @@ class MainMenuState extends MusicBeatState
 
 
 
-		// textos relacionados a las versiones de PE, SL y FNF:
+		// textos relacionados a las versiones de PE, SLE y FNF:
 		FlxG.camera.follow(camFollowPos, null, 1);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
@@ -155,6 +158,11 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
+
+		//var versionShit:FlxText = new FlxText(12, FlxG.height - 72, 0, "Build " + sleBuild, 12);
+		//versionShit.scrollFactor.set();
+		//versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

@@ -4,7 +4,7 @@
 
 	<app title="Slushi Engine" file="SlushiEngine" packageName="com.slushi.slushiengine" package="com.slushi.slushiengine" main="Main" version="0.2.8" company="Slushi" />
 
-	<app title="Slushi Engine (DEBUG MODE)" if="debug" />
+	<app title="Slushi Engine [DEBUG MODE]" file="SlushiEngine[DEBUG]" if="debug" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->
 	<set name="APP_ID" value="0x0100f6c013bbc000" />
@@ -127,6 +127,8 @@
 
 	<haxelib name="flixel" />
 	<haxedev set='webgl' />
+
+	<haxelib name="flixel-shadertoy-shader" />
 
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />

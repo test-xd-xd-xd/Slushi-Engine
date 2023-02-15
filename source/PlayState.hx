@@ -92,7 +92,7 @@ class PlayState extends MusicBeatState
 		['Good', 0.8], //From 70% to 79%
 		['Great', 0.9], //From 80% to 89%
 		['Sick!', 1], //From 90% to 99%
-		['Perfect!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
+		['GET THE FULL COMBO!!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
 
 	//event variables
@@ -327,6 +327,8 @@ class PlayState extends MusicBeatState
 	public static var lastCombo:FlxSprite;
 	// stores the last combo score objects in an array
 	public static var lastScore:Array<FlxSprite> = [];
+
+	private var box:FlxSprite;
 
 	override public function create()
 	{
@@ -1153,7 +1155,9 @@ class PlayState extends MusicBeatState
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
+		scoreTxt.color = 0xFFD5F4DD;
 		scoreTxt.visible = !ClientPrefs.hideHud;
+
 		add(scoreTxt);
 
 		botplayTxt = new FlxText(400, timeBarBG.y + 55, FlxG.width - 800, "AUTOPLAY", 32);
@@ -1500,15 +1504,29 @@ class PlayState extends MusicBeatState
 		#if LUA_ALLOWED
 		luaDebugGroup.forEachAlive(function(spr:DebugLuaText) {
 			spr.y += 20;
+
+			//box = new FlxSprite().makeGraphic(1, 1, FlxColor.BLACK);
+			//box.alpha = 0.6;
+			//add(box);
+			//box.setGraphicSize(Std.int(.width + 20), Std.int(addTextToDebug.height + 25));
+	
+
 		});
 
 		if(luaDebugGroup.members.length > 34) {
 			var blah = luaDebugGroup.members[34];
 			blah.destroy();
+			//box.destroy();
 			luaDebugGroup.remove(blah);
 		}
 		luaDebugGroup.insert(0, new DebugLuaText(text, luaDebugGroup, color));
+
+
+	
+
 		#end
+
+		
 	}
 
 	public function reloadHealthBarColors() {
