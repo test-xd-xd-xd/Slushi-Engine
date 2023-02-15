@@ -90,9 +90,9 @@ class FunkinLua {
 			var result:Dynamic = LuaL.dofile(lua, script);
 			var resultStr:String = Lua.tostring(lua, result);
 			if(resultStr != null && result != 0) {
-				trace('Error loading LUA script! What happened?! ' + resultStr);
+				trace('Error loading Lua script! What happened?! ' + resultStr);
 				#if windows
-				lime.app.Application.current.window.alert(resultStr, 'Error loading LUA script! What happened?!');
+				lime.app.Application.current.window.alert(resultStr, 'Error loading Lua script! What happened?!');
 				#else
 				luaTrace('Error loading lua script: "$script"\n' + resultStr, true, false, FlxColor.RED);
 				#end
@@ -3116,6 +3116,7 @@ class FunkinLua {
 	function cameraFromString(cam:String):FlxCamera {
 		switch(cam.toLowerCase()) {
 			case 'camhud' | 'hud': return PlayState.instance.camHUD;
+			//case 'camnotes' | 'camnotes': return PlayState.instance.camNotes;
 			case 'camother' | 'other': return PlayState.instance.camOther;
 		}
 		return PlayState.instance.camGame;
