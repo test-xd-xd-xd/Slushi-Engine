@@ -217,6 +217,7 @@ class PlayState extends MusicBeatState
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
+	public var camNotes:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
 	public var cameraSpeed:Float = 1;
@@ -398,12 +399,15 @@ class PlayState extends MusicBeatState
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
+		camNotes = new FlxCamera();
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
+		camNotes.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
+		FlxG.cameras.add(camNotes, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
@@ -1170,9 +1174,9 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
-		strumLineNotes.cameras = [camHUD];
+		strumLineNotes.cameras = [camNotes];
 		grpNoteSplashes.cameras = [camHUD];
-		notes.cameras = [camHUD];
+		notes.cameras = [camNotes];
 		healthBar.cameras = [camHUD];
 		healthBarBG.cameras = [camHUD];
 		iconP1.cameras = [camHUD];
@@ -1287,6 +1291,7 @@ class PlayState extends MusicBeatState
 					whiteScreen.scrollFactor.set();
 					whiteScreen.blend = ADD;
 					camHUD.visible = false;
+					camNotes.visible = false;
 					snapCamFollowToPos(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 					inCutscene = true;
 
@@ -1296,6 +1301,7 @@ class PlayState extends MusicBeatState
 						onComplete: function(twn:FlxTween)
 						{
 							camHUD.visible = true;
+							camNotes.visible = true;
 							remove(whiteScreen);
 							startCountdown();
 						}
@@ -1309,6 +1315,7 @@ class PlayState extends MusicBeatState
 					add(blackScreen);
 					blackScreen.scrollFactor.set();
 					camHUD.visible = false;
+					camNotes.visible = false;
 					inCutscene = true;
 
 					FlxTween.tween(blackScreen, {alpha: 0}, 0.7, {
@@ -1325,6 +1332,7 @@ class PlayState extends MusicBeatState
 					new FlxTimer().start(0.8, function(tmr:FlxTimer)
 					{
 						camHUD.visible = true;
+						camNotes.visible = true;
 						remove(blackScreen);
 						FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 2.5, {
 							ease: FlxEase.quadInOut,
@@ -1727,6 +1735,7 @@ class PlayState extends MusicBeatState
 			{
 				add(red);
 				camHUD.visible = false;
+				camNotes.visible = false;
 			}
 		}
 
@@ -1764,6 +1773,7 @@ class PlayState extends MusicBeatState
 									{
 										add(dialogueBox);
 										camHUD.visible = true;
+										camNotes.visible = true;
 									}, true);
 								});
 								new FlxTimer().start(3.2, function(deadTime:FlxTimer)
@@ -1793,6 +1803,7 @@ class PlayState extends MusicBeatState
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		dadGroup.alpha = 0.00001;
 		camHUD.visible = false;
+		camNotes.visible = false;
 		//inCutscene = true; //this would stop the camera movement, oops
 
 		var tankman:FlxSprite = new FlxSprite(-20, 320);
@@ -1828,6 +1839,7 @@ class PlayState extends MusicBeatState
 
 			dadGroup.alpha = 1;
 			camHUD.visible = true;
+			camNotes.visible = true;
 			boyfriend.animation.finishCallback = null;
 			gf.animation.finishCallback = null;
 			gf.dance();
@@ -3153,6 +3165,7 @@ class PlayState extends MusicBeatState
 		{
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 			camHUD.zoom = FlxMath.lerp(1, camHUD.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
+			camNotes.zoom = FlxMath.lerp(1, camNotes.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125 * camZoomingDecay * playbackRate), 0, 1));
 		}
 
 		FlxG.watch.addQuick("secShit", curSection);
@@ -3629,11 +3642,14 @@ class PlayState extends MusicBeatState
 				if(ClientPrefs.camZooms && FlxG.camera.zoom < 1.35) {
 					var camZoom:Float = Std.parseFloat(value1);
 					var hudZoom:Float = Std.parseFloat(value2);
+					var notesZoom:Float = Std.parseFloat(value2);
 					if(Math.isNaN(camZoom)) camZoom = 0.015;
 					if(Math.isNaN(hudZoom)) hudZoom = 0.03;
+					if(Math.isNaN(notesZoom)) notesZoom = 0.03;
 
 					FlxG.camera.zoom += camZoom;
 					camHUD.zoom += hudZoom;
+					camNotes.zoom += notesZoom;
 				}
 
 			case 'Trigger BG Ghouls':
@@ -4029,6 +4045,7 @@ class PlayState extends MusicBeatState
 						blackShit.scrollFactor.set();
 						add(blackShit);
 						camHUD.visible = false;
+						camNotes.visible = false;
 
 						FlxG.sound.play(Paths.sound('Lights_Shut_off'));
 					}
