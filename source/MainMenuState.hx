@@ -20,16 +20,18 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
-
 import lime.utils.AssetLibrary;
+
+import Sys;
 
 using StringTools;
 
 class MainMenuState extends MusicBeatState
 { 
 	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
-	public static var slushiEngineVersion:String = '0.0.1 (ALPHA)';
-	//public static var sleBuild:String = new Date.
+	public static var slushiEngineVersion:String = '0.0.2 (ALPHA)';
+	private static var sleBuild = Sys.systemName();
+	
 	public static var curSelected:Int = 0;
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
@@ -42,7 +44,7 @@ class MainMenuState extends MusicBeatState
 		#if MODS_ALLOWED 'mods', #end
 		//#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
-	//	#if !switch 'donate', #end
+		//#if !switch 'donate', #end
 		'options'
 	];
 
@@ -147,7 +149,7 @@ class MainMenuState extends MusicBeatState
 
 
 
-		// textos relacionados a las versiones de PE, SLE y FNF:
+		// textos relacionados a las versiones de PE, SLE (y build compilada) y FNF:
 		FlxG.camera.follow(camFollowPos, null, 1);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
@@ -158,10 +160,11 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-
-		//var versionShit:FlxText = new FlxText(12, FlxG.height - 72, 0, "Build " + sleBuild, 12);
-		//versionShit.scrollFactor.set();
-		//versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		
+		var sysComp:FlxText = new FlxText(12, FlxG.height - 82, 0, "Compiled for " + sleBuild, 12);
+		sysComp.scrollFactor.set();
+		sysComp.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(sysComp);
 
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
