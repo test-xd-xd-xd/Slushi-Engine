@@ -23,6 +23,7 @@ class NoteOffsetState extends MusicBeatState
 
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
+	public var camNotes:FlxCamera;
 	public var camOther:FlxCamera;
 
 	var coolText:FlxText;
