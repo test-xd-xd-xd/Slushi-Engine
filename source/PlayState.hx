@@ -58,6 +58,7 @@ import animateatlas.AtlasFrameMaker;
 import Achievements;
 import StageData;
 import FunkinLua;
+import FunkinLuaITG;
 import DialogueBoxPsych;
 import Conductor.Rating;
 
@@ -220,6 +221,11 @@ class PlayState extends MusicBeatState
 	public var camNotes:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
+	public var camTimeBar:FlxCamera;
+	public var camHealthBar:FlxCamera;
+	public var camAutoplay:FlxCamera;
+	public var camCombo:FlxCamera;
+
 	public var cameraSpeed:Float = 1;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
@@ -309,6 +315,7 @@ class PlayState extends MusicBeatState
 	// Lua shit
 	public static var instance:PlayState;
 	public var luaArray:Array<FunkinLua> = [];
+	public var luaArrayITG:Array<FunkinLuaITG> = [];
 	private var luaDebugGroup:FlxTypedGroup<DebugLuaText>;
 	public var introSoundsSuffix:String = '';
 
@@ -400,14 +407,25 @@ class PlayState extends MusicBeatState
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
 		camNotes = new FlxCamera();
+		camTimeBar = new FlxCamera();
+		camHealthBar = new FlxCamera();
+		camAutoplay = new FlxCamera();
+		camCombo = new FlxCamera();
+		
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 		camNotes.bgColor.alpha = 0;
+		camTimeBar.bgColor.alpha = 0;
+		camHealthBar.bgColor.alpha = 0;
+		camAutoplay.bgColor.alpha = 0;
+		camCombo.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
 		FlxG.cameras.add(camHUD, false);
 		FlxG.cameras.add(camOther, false);
 		FlxG.cameras.add(camNotes, false);
+		FlxG.cameras.add(camTimeBar, false);
+		FlxG.cameras.add(camHealthBar, false);
 		grpNoteSplashes = new FlxTypedGroup<NoteSplash>();
 
 		FlxG.cameras.setDefaultDrawTarget(camGame, true);
@@ -1175,17 +1193,17 @@ class PlayState extends MusicBeatState
 		}
 
 		strumLineNotes.cameras = [camNotes];
-		grpNoteSplashes.cameras = [camHUD];
+		grpNoteSplashes.cameras = [camNotes];
 		notes.cameras = [camNotes];
-		healthBar.cameras = [camHUD];
-		healthBarBG.cameras = [camHUD];
-		iconP1.cameras = [camHUD];
-		iconP2.cameras = [camHUD];
-		scoreTxt.cameras = [camHUD];
+		healthBar.cameras = [camHealthBar];
+		healthBarBG.cameras = [camHealthBar];
+		iconP1.cameras = [camHealthBar];
+		iconP2.cameras = [camHealthBar];
+		scoreTxt.cameras = [camHealthBar];
 		botplayTxt.cameras = [camHUD];
-		timeBar.cameras = [camHUD];
-		timeBarBG.cameras = [camHUD];
-		timeTxt.cameras = [camHUD];
+		timeBar.cameras = [camTimeBar];
+		timeBarBG.cameras = [camTimeBar];
+		timeTxt.cameras = [camTimeBar];
 		doof.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
@@ -1275,6 +1293,11 @@ class PlayState extends MusicBeatState
 						luaArray.push(new FunkinLua(folder + file));
 						filesPushed.push(file);
 					}
+					if(file.endsWith('ITG.lua') && !filesPushed.contains(file))
+						{
+							luaArrayITG.push(new FunkinLuaITG(folder + file));
+							filesPushed.push(file);
+						}
 				}
 			}
 		}
@@ -4197,7 +4220,7 @@ class PlayState extends MusicBeatState
 		}
 
 		rating.loadGraphic(Paths.image(pixelShitPart1 + daRating.image + pixelShitPart2));
-		rating.cameras = [camHUD];
+		rating.cameras = [camHealthBar];
 		rating.screenCenter();
 		rating.x = coolText.x - 40;
 		rating.y -= 60;
@@ -4209,7 +4232,7 @@ class PlayState extends MusicBeatState
 		rating.y -= ClientPrefs.comboOffset[1];
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(pixelShitPart1 + 'combo' + pixelShitPart2));
-		comboSpr.cameras = [camHUD];
+		comboSpr.cameras = [camCombo];
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x;
 		comboSpr.acceleration.y = FlxG.random.int(200, 300) * playbackRate * playbackRate;
