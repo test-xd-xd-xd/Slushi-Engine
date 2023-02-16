@@ -62,7 +62,7 @@ class FunkinLuaITG {
 				#if windows
 				lime.app.Application.current.window.alert(resultStr, 'Error loading Lua ITG script! What happened?!');
 				#else
-				luaTrace('Error loading lua ITG script: "$script"\n' + resultStr, true, false, FlxColor.RED);
+				trace('Error loading lua ITG script: "$script"\n' + resultStr, true, false, FlxColor.RED);
 				#end
 				lua = null;
 				return;
